@@ -22,7 +22,7 @@ app.use(
 )
 
 // Start the server and log the URL
-const port = 5001
+const port = process.env.PORT || 5001
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`)
 })

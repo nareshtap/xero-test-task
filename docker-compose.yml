@@ -24,6 +24,7 @@ services:
       - xero-net
     environment:
       - MOCK_XERO_API_URL=http://mock-xero-api:3000
+      - PORT=5001
     volumes:
       - ./backend:/app
     command: ['npm', 'run', 'dev']

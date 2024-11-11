@@ -1,15 +1,15 @@
 {
-  "compilerOptions": {
-    "target": "ESNext",           // Target modern JavaScript
-    "module": "CommonJS",           // Use ES modules
-    "moduleResolution": "node",   // Resolve modules like Node.js
-    "esModuleInterop": true,      // Allow importing CommonJS modules
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist",           // Directory for compiled output
-    "rootDir": "./src",           // The source directory for TypeScript files
-    "strict": true
-  },
-  "include": ["src/**/*"],        // Include all files under 'src' directory
-  "exclude": ["node_modules"]     // Exclude 'node_modules'
+	"compilerOptions": {
+		"target": "ESNext", // Target modern JavaScript
+		"module": "CommonJS", // Use ES modules
+		"moduleResolution": "node", // Resolve modules like Node.js
+		"esModuleInterop": true, // Allow importing CommonJS modules
+		"skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"outDir": "./dist", // Directory for compiled output
+		"rootDir": "./src", // The source directory for TypeScript files
+		"strict": true
+	},
+	"include": ["src/**/*"], // Include all files under 'src' directory
+	"exclude": ["node_modules"] // Exclude 'node_modules'
 }

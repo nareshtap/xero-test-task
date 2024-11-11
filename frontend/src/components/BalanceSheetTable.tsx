@@ -11,14 +11,11 @@ import {
 	Alert,
 	CircularProgress,
 } from '@mui/material'
-// import { mockData } from './mockData'
 
-import { fetchBalanceSheet } from '../api/service' // Import the service function
-import { BalanceSheetResponse } from '../types/balance-sheet' // Import types
+import { fetchBalanceSheet } from '../api/service'
+import { BalanceSheetResponse } from '../types/balance-sheet'
 
 const BalanceSheetTable: React.FC = () => {
-	// const report = mockData.Reports[0]
-
 	const [reportData, setReportData] = useState<BalanceSheetResponse | null>(
 		null
 	)
@@ -28,7 +25,7 @@ const BalanceSheetTable: React.FC = () => {
 	const isFetched = useRef(false)
 
 	useEffect(() => {
-		if (isFetched.current) return // Skip if data is already fetched
+		if (isFetched.current) return
 		const getReportData = async () => {
 			try {
 				const data = await fetchBalanceSheet()
@@ -42,8 +39,8 @@ const BalanceSheetTable: React.FC = () => {
 
 		getReportData()
 
-		isFetched.current = true // Mark as fetched
-	}, []) // Empty dependency array ensures this runs only once on mount
+		isFetched.current = true
+	}, [])
 
 	const renderRows = (rows: any[]) => {
 		return rows.map((row, index) => {
