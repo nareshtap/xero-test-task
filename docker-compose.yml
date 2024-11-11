@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  mock-xero-api:
+    image: jaypeng2015/show-me-the-money
+    container_name: mock-xero-api
+    ports:
+      - '3000:3000'
+    networks:
+      - xero-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: backend
+    links:
+      - mock-xero-api
+    ports:
+      - '5001:5001'
+    depends_on:
+      - mock-xero-api
+    networks:
+      - xero-net
+    environment:
+      - MOCK_XERO_API_URL=http://mock-xero-api:3000
+    volumes:
+      - ./backend:/app
+    command: ['npm', 'run', 'dev']
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: frontend
+    ports:
+      - '3001:3001'
+    depends_on:
+      - backend
+    networks:
+      - xero-net
+    environment:
+      - REACT_APP_API_URL=http://localhost:5001
+      - PORT=3001
+    volumes:
+      - ./frontend:/app
+    command: ['npm', 'start']
+
+networks:
+  xero-net:
+    driver: bridge
