@@ -1,8 +1,11 @@
 # xero-test-task
 
+- Create `.env` file inside frontend and backend
+- Copy-paste `.env.example` to created `.env` file accordingly
+
 To run project:
 
-- `npm i`
+- Run `npm i`
 
   - [Inside frontend and backend to install required packages]
 
