@@ -13,7 +13,7 @@ import {
 } from '@mui/material'
 
 import { fetchBalanceSheet } from '../api/service'
-import { BalanceSheetResponse } from '../types/balance-sheet'
+import { BalanceSheetResponse, Cell, Row } from '../types/balance-sheet'
 
 const BalanceSheetTable: React.FC = () => {
 	const [reportData, setReportData] = useState<BalanceSheetResponse | null>(
@@ -42,7 +42,7 @@ const BalanceSheetTable: React.FC = () => {
 		isFetched.current = true
 	}, [])
 
-	const renderRows = (rows: any[]) => {
+	const renderRows = (rows: Row[]) => {
 		return rows.map((row, index) => {
 			if (row.RowType === 'Section' && row.Title) {
 				return (
@@ -61,7 +61,7 @@ const BalanceSheetTable: React.FC = () => {
 			} else if (row.RowType === 'Row' || row.RowType === 'SummaryRow') {
 				return (
 					<TableRow key={index}>
-						{row.Cells.map((cell: any, cellIndex: number) => (
+						{row.Cells.map((cell: Cell, cellIndex: number) => (
 							<TableCell key={cellIndex}>{cell.Value}</TableCell>
 						))}
 					</TableRow>
@@ -110,7 +110,7 @@ const BalanceSheetTable: React.FC = () => {
 				<TableHead>
 					<TableRow>
 						{report.Rows[0]?.Cells &&
-							report.Rows[0].Cells.map((cell: any, index: number) => (
+							report.Rows[0].Cells.map((cell: Cell, index: number) => (
 								<TableCell key={index} style={{ fontWeight: 'bold' }}>
 									{cell.Value}
 								</TableCell>

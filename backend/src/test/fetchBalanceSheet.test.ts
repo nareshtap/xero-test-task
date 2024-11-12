@@ -25,35 +25,38 @@ describe('fetchBalanceSheet', () => {
 	}
 
 	beforeEach(() => {
-		// Reset the mock before each test
+		// Reset the mock and set up the environment variable for each test
 		jest.clearAllMocks()
 		process.env.MOCK_XERO_API_URL = mockApiUrl
 	})
 
 	it('should fetch the balance sheet data successfully', async () => {
 		// Mock the successful response from axios
-		;(axios.get as jest.Mock).mockResolvedValue({
+		mockedAxios.get.mockResolvedValue({
 			data: mockBalanceSheetResponse,
 		})
 
 		const result = await fetchBalanceSheet()
 
-		expect(axios.get).toHaveBeenCalledWith(
+		expect(mockedAxios.get).toHaveBeenCalledWith(
 			`${mockApiUrl}/api.xro/2.0/Reports/BalanceSheet`
 		)
 		expect(result).toEqual(mockBalanceSheetResponse)
 	})
 
 	it('should throw an error when the request fails', async () => {
-		// Define the error message to be thrown
 		const errorMessage = 'Network error'
-
-		// Mock the axios.get call to reject with an error
 		mockedAxios.get.mockRejectedValueOnce(new Error(errorMessage))
 
-		// Expect fetchBalanceSheet to throw an error with the appropriate message
 		await expect(fetchBalanceSheet()).rejects.toThrow(
-			'Balance sheet fetch failed'
+			`Balance sheet fetch failed: ${errorMessage}`
 		)
+	})
+
+	it('should throw an error when the API URL is missing', async () => {
+		// Temporarily unset the API URL environment variable
+		delete process.env.MOCK_XERO_API_URL
+
+		await expect(fetchBalanceSheet()).rejects.toThrow('Xero API not found')
 	})
 })

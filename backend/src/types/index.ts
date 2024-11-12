@@ -5,22 +5,21 @@ interface Report {
 	ReportTitles: string[]
 	ReportDate: string
 	UpdatedDateUTC: string
-	Fields: Field[] // Placeholder for field structure, can be refined later
+	Fields: Field[]
 	Rows: Row[]
 }
 
-// Field structure with an extensible field type
 interface Field {
-	name: string // Name of the field
-	type: string // Type of data (e.g., string, number)
-	value: string | number | null // Field value
+	name: string
+	type: string
+	value: string | number | null
 }
 
 interface Row {
 	RowType: string
 	Cells: Cell[]
-	Title?: string // Optional for Section rows
-	Rows?: Row[] // Optional for Section rows
+	Title?: string
+	Rows?: Row[]
 }
 
 interface Cell {
